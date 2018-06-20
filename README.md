@@ -1,2 +1,2 @@
 # apss
-Material for the Asiago Polarimetru Summer School (2018)
+Material for the Asiago Polarimetry Summer School (2018)
