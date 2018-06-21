@@ -21,7 +21,6 @@
 from __future__ import print_function, division
 
 
-import random
 import numpy as np
 from matplotlib import pyplot as plt
 

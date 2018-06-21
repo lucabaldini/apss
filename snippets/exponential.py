@@ -21,24 +21,23 @@
 from __future__ import print_function, division
 
 
-import random
 import numpy as np
 from matplotlib import pyplot as plt
 
 plt.ion()
 
 
-def pdf(x, lambda_):
+def pdf(x, lambda_=1):
     """Probability density function.
     """
     return lambda_ * np.exp(-lambda_ * x)
 
-def cf(x, lambda_):
+def cf(x, lambda_=1):
     """Cumulative function.
     """
     return 1. - np.exp(-lambda_ * x)
 
-def ppf(q, lambda_):
+def ppf(q, lambda_=1):
     """Percent-point function.
     """
     return -np.log(1. - q) / lambda_
