@@ -35,7 +35,7 @@ def pdf(phi, m, phi0=0):
 def cf(phi, m, phi0=0):
     """Cumulative function.
     """
-    return 1. / (2 * np.pi) * (phi + 0.5 * m * np.sin(2 * (phi - phi0)))
+    return 0.5 + 1. / (2 * np.pi) * (phi + 0.5 * m * np.sin(2 * (phi - phi0)))
 
 def ppf(phi, m, phi0=0):
     """Percent-point function.
