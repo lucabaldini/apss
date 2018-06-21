@@ -37,14 +37,35 @@ def cf(phi, m, phi0=0):
     """
     return 0.5 + 1. / (2 * np.pi) * (phi + 0.5 * m * np.sin(2 * (phi - phi0)))
 
-
-m = np.linspace(0., 1., 200)
-phi = np.linspace(-np.pi, np.pi, 200)
-z = pdf(*np.meshgrid(phi, m)).T
+n = 200
+m = np.linspace(0., 1., n)
+phi = np.linspace(-np.pi, np.pi, n)
+q = np.linspace(0., 1., n)
 
 plt.figure()
+z = pdf(*np.meshgrid(phi, m)).T
 plt.contourf(m, phi, z, 75, cmap=plt.get_cmap('afmhot'))
-plt.colorbar().set_label('pdf')
+plt.colorbar().set_label('$pdf(\\phi; m, \\phi_0 = 0)$')
 plt.xlabel('m')
 plt.ylabel('$\\phi$ [rad]')
+plt.savefig('cos2_pdf_2d.pdf')
 
+plt.figure()
+z = cf(*np.meshgrid(phi, m)).T
+plt.contourf(m, phi, z, 75, cmap=plt.get_cmap('afmhot'))
+plt.colorbar().set_label('$F(\\phi; m, \\phi_0 = 0)$')
+plt.xlabel('m')
+plt.ylabel('$\\phi$ [rad]')
+plt.savefig('cos2_cf_2d.pdf')
+
+plt.figure()
+z = np.zeros(shape=(m.size, q.size))
+for i, _m in enumerate(m):
+    y = cf(phi, _m)
+    _ppf = InterpolatedUnivariateSpline(y, phi, k=3)
+    z[i,] = _ppf(q)
+plt.contourf(m, q, z.T, 75, cmap=plt.get_cmap('afmhot'))
+plt.colorbar().set_label('ppf(q)')
+plt.xlabel('m')
+plt.ylabel('q')
+plt.savefig('cos2_ppf_2d.pdf')
